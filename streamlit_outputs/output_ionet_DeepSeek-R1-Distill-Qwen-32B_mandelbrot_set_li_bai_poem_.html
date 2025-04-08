@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mandelbrot Set Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .stats {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #000;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="stats" id="stats"></div>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const stats = document.getElementById('stats');
+
+        let width, height;
+        let frame = 0;
+        let lastTime = 0;
+        let fps = 0;
+        let avgFps = 0;
+        let totalFrames = 0;
+
+        const chars = "床前明月光疑是地上霜举头望低思故乡".split('');
+        const colors = ['#eaf4fc', '#eaedf7', '#e8ecef', '#ebf6f7', '#bbc8e6', '#bbbcde', '#8491c3', '#867ba9', '#68699b', '#706caa', '#5654a2', '#4d4398', '#4a488e', '#274a78', '#2a4073', '#223a70', '#192f60', '#1c305c', '#17184b', '#0f2350'];
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        function mandelbrot(x0, y0, maxIter) {
+            let x = 0, y = 0;
+            let iter = 0;
+            while (x*x + y*y <= 4 && iter < maxIter) {
+                const xtemp = x*x - y*y + x0;
+                y = 2*x*y + y0;
+                x = xtemp;
+                iter++;
+            }
+            return iter === maxIter ? -1 : iter;
+        }
+
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, width, height);
+
+            const scale = 0.5 * (1 + 0.005 * frame);
+            const centerX = -0.75;
+            const centerY = 0;
+            const scaleX = scale * width / 4;
+            const scaleY = scale * height / 4;
+
+            ctx.font = '8px monospace';
+            ctx.textBaseline = 'top';
+
+            for (let y = 0; y < height; y += 8) {
+                for (let x = 0; x < width; x += 8) {
+                    const px = (x - width/2) / scaleX + centerX;
+                    const py = (y - height/2) / scaleY + centerY;
+                    const iter = mandelbrot(px, py, 200);
+
+                    if (iter === -1) {
+                        continue;
+                    }
+
+                    const color = colors[Math.min(iter, colors.length - 1)];
+                    ctx.fillStyle = color;
+                    ctx.fillText(chars[iter % chars.length], x, y);
+                }
+            }
+
+            frame = (frame + 1) % 200;
+            totalFrames++;
+
+            const now = Date.now();
+            fps = Math.round(1000 / (now - lastTime));
+            lastTime = now;
+
+            if (totalFrames % 200 === 0) {
+                avgFps = Math.round(totalFrames / (now - lastTimeStart) * 1000);
+            }
+
+            stats.innerHTML = `FPS: ${fps} | AVG FPS: ${avgFps} | CURRENT FRAME: ${frame + 1}/200`;
+        }
+
+        function animate(timestamp) {
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        lastTimeStart = Date.now();
+        animate(0);
+    </script>
+</body>
+</html>
