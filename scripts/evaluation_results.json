@@ -1,0 +1,22 @@
+[
+    {
+        "model": "meta-llama/Llama-3.3-70B-Instruct",
+        "dataset": "ARC",
+        "accuracy": 0.0
+    },
+    {
+        "model": "deepseek-ai/DeepSeek-R1",
+        "dataset": "ARC",
+        "accuracy": 0.0
+    },
+    {
+        "model": "meta-llama/Llama-3.3-70B-Instruct",
+        "dataset": "TruthfulQA",
+        "accuracy": 0.0
+    },
+    {
+        "model": "deepseek-ai/DeepSeek-R1",
+        "dataset": "TruthfulQA",
+        "accuracy": 0.0
+    }
+]

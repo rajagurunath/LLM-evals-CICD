@@ -1,0 +1,29 @@
+name: Evaluate LLMs using OPENAI Evals
+
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    env:
+      IOINTELLIGENCE_API_KEY: ${{ secrets.IOINTELLIGENCE_API_KEY }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests datasets
+
+      - name: Run Evaluation Script
+        run: python scripts/openai_evals.py 
+
