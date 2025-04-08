@@ -29,5 +29,6 @@ jobs:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           config: 'prompts/promptfooconfig.yaml'
+          prompts: 'prompts/redteam2.yaml'
           use-config-prompts: true
           cache-path: ~/.cache/promptfoo
