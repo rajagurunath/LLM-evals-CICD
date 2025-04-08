@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 # from PIL import Image # No longer needed
 import re
 # Define CSS styles
+st.set_page_config(layout="wide")
+
 css = """
 <style>
 .custom-container {
@@ -455,7 +457,6 @@ def calculate_total_points(criteria_list):
 
 col1, col2 = st.columns(2)
 col1.image("https://io.net/_next/static/media/brandLogoLeft.29930dac.svg")
-# st.set_page_config(layout="wide")
 st.title("LLM Model Comparison - Coding capabilties using Kcores")
 st.markdown("""
 
