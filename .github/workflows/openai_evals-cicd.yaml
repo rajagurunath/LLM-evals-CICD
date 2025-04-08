@@ -1,0 +1,33 @@
+name: Evaluate LLMs
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    env:
+      IOINTELLIGENCE_API_KEY: ${{ secrets.IOINTELLIGENCE_API_KEY }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests datasets
+
+      - name: Run Evaluation Script
+        run: python scripts/openai_evals.py 
+
+      - name: Upload Evaluation Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: evaluation-results
+          path: evaluation_results.json
