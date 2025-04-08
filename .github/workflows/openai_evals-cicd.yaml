@@ -27,8 +27,3 @@ jobs:
       - name: Run Evaluation Script
         run: python scripts/openai_evals.py 
 
-      - name: Upload Evaluation Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: evaluation-results
-          path: evaluation_results.json
