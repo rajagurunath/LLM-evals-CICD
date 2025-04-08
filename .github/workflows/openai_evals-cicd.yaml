@@ -1,4 +1,4 @@
-name: Evaluate LLMs
+name: Evaluate LLMs using OPENAI Evals
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ jobs:
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
