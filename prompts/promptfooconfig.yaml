@@ -15,7 +15,7 @@ targets:
       method: "POST"
       headers:
         Content-Type: "application/json"
-        Authorization: "Bearer {{api_key}}"
+        Authorization: "Bearer {{openai-api-key}}"
       body:
         model: "meta-llama/Llama-3.3-70B-Instruct"
         messages:
@@ -30,7 +30,7 @@ targets:
       method: "POST"
       headers:
         Content-Type: "application/json"
-        Authorization: "Bearer {{api_key}}"
+        Authorization: "Bearer {{openai-api-key}}"
       body:
         model: "meta-llama/Llama-3.3-70B-Instruct"
         messages:
