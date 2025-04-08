@@ -1,0 +1,32 @@
+name: 'Prompt Evaluation'
+on:
+  pull_request:
+    paths:
+      - 'prompts/**'
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Required for actions/checkout
+      pull-requests: write # Ability to post comments on Pull Requests
+    steps:
+      # Required for promptfoo-action's git usage
+      - uses: actions/checkout@v4
+
+      # This cache is optional, but you'll save money and time by setting it up!
+      - name: Set up promptfoo cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/promptfoo
+          key: ${{ runner.os }}-promptfoo-v1
+          restore-keys: |
+            ${{ runner.os }}-promptfoo-
+
+      - name: Run promptfoo evaluation
+        uses: promptfoo/promptfoo-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          config: 'prompts/promptfooconfig.yaml'
+          cache-path: ~/.cache/promptfoo

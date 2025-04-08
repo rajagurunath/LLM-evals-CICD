@@ -3,7 +3,7 @@
 # Red teaming configuration
 
 # Docs: https://promptfoo.dev/docs/red-team/configuration
-description: "My first red team"
+description: "IONET intelligence red team configuration"
 
 targets:
   # Red team targets. To talk directly to your application, use a custom provider.
@@ -70,20 +70,20 @@ redteam:
     # - harmful:illegal-drugs  # Tests handling of illegal drug-related content
     # - harmful:illegal-drugs:meth  # Tests handling of methamphetamine-related content
     # - harmful:indiscriminate-weapons  # Tests handling of weapons-related content
-    # - harmful:insults  # Tests handling of personal attacks and insults
-    # - harmful:intellectual-property  # Tests handling of IP theft and violations
-    # - harmful:misinformation-disinformation  # Tests handling of false information campaigns
-    # - harmful:non-violent-crime  # Tests handling of non-violent criminal content
-    # - harmful:privacy  # Tests handling of privacy violation attempts
-    # - harmful:profanity  # Tests handling of profane or inappropriate language
-    # - harmful:radicalization  # Tests handling of extremist content and recruitment
-    # - harmful:self-harm  # Tests handling of self-harm and suicide content
-    # - harmful:sex-crime  # Tests handling of sexual crime content
-    # - harmful:sexual-content  # Tests handling of explicit sexual content
-    # - harmful:specialized-advice  # Tests handling of unauthorized professional advice
-    # - harmful:unsafe-practices  # Tests handling of dangerous activity instructions
-    # - harmful:violent-crime  # Tests handling of violent crime content
-    # - harmful:weapons:ied  # Tests handling of Improvised Explosive Devices
+    - harmful:insults  # Tests handling of personal attacks and insults
+    - harmful:intellectual-property  # Tests handling of IP theft and violations
+    - harmful:misinformation-disinformation  # Tests handling of false information campaigns
+    - harmful:non-violent-crime  # Tests handling of non-violent criminal content
+    - harmful:privacy  # Tests handling of privacy violation attempts
+    - harmful:profanity  # Tests handling of profane or inappropriate language
+    - harmful:radicalization  # Tests handling of extremist content and recruitment
+    - harmful:self-harm  # Tests handling of self-harm and suicide content
+    - harmful:sex-crime  # Tests handling of sexual crime content
+    - harmful:sexual-content  # Tests handling of explicit sexual content
+    - harmful:specialized-advice  # Tests handling of unauthorized professional advice
+    - harmful:unsafe-practices  # Tests handling of dangerous activity instructions
+    - harmful:violent-crime  # Tests handling of violent crime content
+    - harmful:weapons:ied  # Tests handling of Improvised Explosive Devices
     # - hijacking  # Tests for unauthorized resource usage and purpose deviation
     # - pii:api-db  # Tests for PII exposure via API/database access
     # - pii:direct  # Tests for direct PII exposure vulnerabilities
@@ -94,7 +94,7 @@ redteam:
   # Attack methods for applying adversarial inputs
   strategies:
     - basic # Original plugin tests without any additional strategies or optimizations
-    # - jailbreak # Single-shot optimization of safety bypass techniques
+    - jailbreak # Single-shot optimization of safety bypass techniques
     # - jailbreak:composite # Combines multiple jailbreak techniques for enhanced effectiveness
     
   
